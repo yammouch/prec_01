@@ -83,13 +83,15 @@
 
 (defn perm [exc v]
   (if (empty? v)
-    (if (= exc 0) 1 0)
+    1
     (mod (apply + (map-indexed
-                   (fn [i x]
-                     (if (= x 0)
-                       0
-                       (* (- x (if (= exc (+ i 1)) 1 0))
-                          (perm-memo i (consume i v)))))
+                   (fn [i n]
+                     (let [ndec (- n (if (= exc (+ i 1)) 1 0))]
+                       (if (= ndec 0)
+                         0
+                         (* ndec
+                            (perm-memo i (consume i v))
+                            ))))
                    v))
          1000000007)))
 
