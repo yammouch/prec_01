@@ -21,11 +21,11 @@ int main() {
         x++;
     }
     if (x < 0 || w <= x || y < 0 || h <= y) {
-      printf("Invalid\n");
+      printf("invalid\n");
       return 0;
     }
   }
-  printf("Valid\n");
+  printf("valid\n");
 
   return 0;
 }
