@@ -1,47 +1,46 @@
 #include <stdio.h>
 #include <string.h>
 
-char strs[128][128];
+char str[8192];
 int n;
 
 void data_read() {
-  int i;
   scanf("%d", &n);
-  for (i = 0; i < n; i++) {
-    scanf("%s", strs[i]);
-  }
   return;
 }
 
-void search_common(int i) {
-  int j, k, jmax, l;
-  jmax = strlen(strs[i]);
+int search_common(int len) {
+  int j, k, kmax, l;
+  char str_tmp[128];
+  scanf("%s", str_tmp);
+  kmax = strlen(str_tmp);
   k = 0;
-  for (j = 0; j < jmax; j++) {
-    if (strs[i][j] == strs[i+1][k]) {
+  j = len - kmax;
+  if (j < 0) {
+    j = 0;
+  }
+  for (; j < len; j++) {
+    if (str[j] == str_tmp[k]) {
       k++;
     } else {
       k = 0; l = j+1;
     }
   }
-  strs[i][l] = '\0';
-  return;
+  strcpy(str + l, str_tmp);
+  return l + kmax;
 }
 
 void main_loop() {
-  int i;
-  for (i = 0; i < n-1; i++) {
-    search_common(i);
+  int i, len;
+  len = 0;
+  for (i = 0; i < n; i++) {
+    len = search_common(len);
   }
   return;
 }
 
 void print_out() {
-  int i;
-  for (i = 0; i < n; i++) {
-    printf("%s", strs[i]);
-  }
-  printf("\n");
+  printf("%s\n", str);
   return;
 }
 
