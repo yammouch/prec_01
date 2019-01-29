@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-char str[8192];
+char str[16384];
 int n;
 
 void data_read() {
