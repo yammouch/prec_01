@@ -14,7 +14,7 @@ for k in data:
   for i in range(1, len(data[k])):
     data[k][i] += data[k][i-1]
 
-ts = [k for k in dic]
+ts = [k for k in data]
 ts.sort()
 tmax = len(ts)
 
@@ -35,7 +35,7 @@ while stack:
     c1 = [[rt-1, rk, dt-1]]
     if (not c0) and (not c1):
       stack = stack[0:-1]
-    elif all(x in memo for c0 + c1):
+    elif all(x in memo for x in c0 + c1):
       a = []
       for k in c0:
         a.append(memo[k] + ((rk - data[ts[k[1] - 1]]) if k[1] > 0 else 0))
@@ -47,4 +47,4 @@ while stack:
     else:
       stack = stack + c0 + c1
 
-print(max([memo[k] + k[2]**2 for k in init_stack])
+print(max([memo[k] + k[2]**2 for k in init_stack]))
