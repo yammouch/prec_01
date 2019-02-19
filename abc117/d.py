@@ -16,6 +16,5 @@ for i in range(41):
   else:
     max_acc += (1 << i)*v[i]
   max_bit += (1 << i)*max(v[i], n-v[i])
-  print(max_acc, max_bit)
 
 print(max_acc)
