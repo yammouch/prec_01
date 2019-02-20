@@ -23,6 +23,8 @@ for x in data[k:]:
 max_score = 0
 
 while True:
+  #print(eat)
+  #print(noeat)
   score = 0
   for x in eat:
     score += sum(eat[x])
@@ -38,7 +40,7 @@ while True:
   add = None
   max_score1 = 0
   for x in noeat:
-    if max_score1 < -noeat[x][0]:
+    if max_score1 < -noeat[x][0] and not(x in eat):
       add = x
       max_score1 = -noeat[x][0]
   if remove == None or add == None:
