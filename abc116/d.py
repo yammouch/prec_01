@@ -16,9 +16,9 @@ for x in data[0:k]:
 
 for x in data[k:]:
   if x[0] in noeat:
-    heapq.heappush(eat[x[0]], -x[1])
+    heapq.heappush(noeat[x[0]], -x[1])
   else:
-    eat[x[0]] = [-x[1]]
+    noeat[x[0]] = [-x[1]]
 
 max_score = 0
 
@@ -32,7 +32,7 @@ while True:
   remove = None
   min_score1 = 10**12+1
   for x in eat:
-    if 1 < len(eat[x]) and eat[x][0] < min_score:
+    if 1 < len(eat[x]) and eat[x][0] < min_score1:
       remove = x
       min_score1 = eat[x][0]
   add = None
@@ -44,7 +44,7 @@ while True:
   if remove == None or add == None:
     break
   else:
-    eat[add] = [-max_score1]
+    eat[add] = [max_score1]
     heapq.heappop(eat[remove])
     if 1 < len(noeat[add]):
       heapq.heappop(noeat[add])
