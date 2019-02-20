@@ -10,15 +10,21 @@ noeat = {}
 
 for x in data[0:k]:
   if x[0] in eat:
-    heapq.heappush(eat[x[0]], x[1])
+    #heapq.heappush(eat[x[0]], x[1])
+    eat[x[0]].append(x[1])
   else:
     eat[x[0]] = [x[1]]
+for k in eat:
+  eat[k].sort()
 
 for x in data[k:]:
   if x[0] in noeat:
-    heapq.heappush(noeat[x[0]], -x[1])
+    #heapq.heappush(noeat[x[0]], -x[1])
+    noeat[x[0]].append(-x[1])
   else:
     noeat[x[0]] = [-x[1]]
+for k in noeat:
+  noeat[k].sort()
 
 max_score = 0
 
