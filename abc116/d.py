@@ -1,62 +1,42 @@
-import heapq
-
 n, k = [int(x) for x in input().split()]
-
-data = [[int(x) for x in input().split()] for _ in range(n)]
-data.sort(reverse=True, key=lambda x: x[1])
-
-eat = {}
-noeat = {}
-
-for x in data[0:k]:
-  if x[0] in eat:
-    #heapq.heappush(eat[x[0]], x[1])
-    eat[x[0]].append(x[1])
+tops = {}
+rest = []
+for _ in range(n):
+  t, s = [int(x) for x in input().split()]
+  if t not in tops:
+    tops[t] = s
+  elif tops[t] < s: 
+    rest.append(tops[t])
+    tops[t] = s
   else:
-    eat[x[0]] = [x[1]]
-for k in eat:
-  eat[k].sort()
+    rest.append(s)
+    
+tops = [tops[k] for k in tops]
+tops.sort(reverse=True)
+for i in range(1, len(tops)):
+  tops[i] += tops[i-1]
+rest.sort(reverse=True)
+for i in range(1, len(rest)):
+  rest[i] += rest[i-1]
 
-for x in data[k:]:
-  if x[0] in noeat:
-    #heapq.heappush(noeat[x[0]], -x[1])
-    noeat[x[0]].append(-x[1])
-  else:
-    noeat[x[0]] = [-x[1]]
-for k in noeat:
-  noeat[k].sort()
+if len(tops) < k:
+  i_rest = k - len(tops) - 1
+  base = tops[-1] + rest[i_rest]
+  max_score = base + len(tops)**2
+else:
+  i_rest = -1
+  base = tops[k-1]
+  max_score = base + k**2
 
-max_score = 0
+i_rest += 1
 
-while True:
-  #print(eat)
-  #print(noeat)
-  score = 0
-  for x in eat:
-    score += sum(eat[x])
-  score += len(eat)**2
+for i in range(i_rest, min([len(rest), k])):
+  base_old = base
+  base = tops[k-i-2] + rest[i]
+  if (base <= base_old):
+    break
+  score = base + (k-i-1)**2
   if max_score < score:
     max_score = score
-  remove = None
-  min_score1 = 10**12+1
-  for x in eat:
-    if 1 < len(eat[x]) and eat[x][0] < min_score1:
-      remove = x
-      min_score1 = eat[x][0]
-  add = None
-  max_score1 = 0
-  for x in noeat:
-    if max_score1 < -noeat[x][0] and not(x in eat):
-      add = x
-      max_score1 = -noeat[x][0]
-  if remove == None or add == None:
-    break
-  else:
-    eat[add] = [max_score1]
-    heapq.heappop(eat[remove])
-    if 1 < len(noeat[add]):
-      heapq.heappop(noeat[add])
-    else:
-      noeat.pop(add)
 
 print(max_score)
