@@ -1,0 +1,22 @@
+s abc, n=3
+t xy, n=2
+a_b_c_
+x__y__
+
+s abcd
+t ac
+abcd
+a_c_
+
+s abcde
+t axyz
+a___b___c___d___e___
+a____x____y____x____
+
+s abcd
+t ax
+a__b__c__d__
+a_____x_____
+
+x_x_x_x_x_x_
+x__x__x__x__
