@@ -17,9 +17,6 @@ for i in range(0, len(v), 2):
 de_k, do_k = \
  [sorted(d.keys(), reverse=True, key=lambda k: d[k]) for d in [de, do]]
 
-#print(de_k)
-#print(do_k)
-
 if de[de_k[0]] < do[do_k[0]]:
   dl   = do
   dl_k = do_k
@@ -31,14 +28,13 @@ else:
   ds   = do
   ds_k = do_k
 
-#print(n//2 - dl[dl_k[0]] - ds[ds_k[1 if dl_k[0] == ds_k[0] else 0]])
 n_dl = n//2 - dl[dl_k[0]]
 
 if dl_k[0] != ds_k[0]:
-  n_ds = ds_k[0]
+  n_ds = n//2 - ds[ds_k[0]]
 elif len(ds_k) <= 1:
-  n_ds = ds_k[0]
+  n_ds = ds[ds_k[0]]
 else:
-  n_ds = n//2 - ds_k[1]
+  n_ds = n//2 - ds[ds_k[1]]
 
 print(n_dl + n_ds)
