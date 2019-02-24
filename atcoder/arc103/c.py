@@ -17,6 +17,11 @@ for i in range(0, len(v), 2):
 de_k, do_k = \
  [sorted(d.keys(), reverse=True, key=lambda k: d[k]) for d in [de, do]]
 
+print(de_k[0:4])
+print([de[k] for k in de_k[0:4]])
+print(do_k[0:4])
+print([do[k] for k in do_k[0:4]])
+
 if de[de_k[0]] < do[do_k[0]]:
   dl   = do
   dl_k = do_k
