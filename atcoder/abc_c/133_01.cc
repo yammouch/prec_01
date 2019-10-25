@@ -11,7 +11,7 @@ int main()
   for (int i = 0; i < 2019; i++) {
     exists[i] = 0;
   }
-  for (int i = l; i <= r; i++) {
+  for (int i = l; i <= r && i <= l+2019; i++) {
     exists[i%2019] = 1;
   }
 
