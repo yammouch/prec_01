@@ -19,8 +19,8 @@ template <class T> T gcd(T a, T b)
 template <class T> map<T, int> prime_factor(T n)
 {
   map<T, int> ret;
-  for (T i = 2; i*i < n; i++) {
-    if (n % i == 0) {
+  for (T i = 2; i*i <= n; i++) {
+    while (n % i == 0) {
       ret[i]++;
       n /= i;
     }
