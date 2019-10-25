@@ -9,7 +9,7 @@ int main()
 
   cin >> n >> k >> q;
 
-  vector<int> player(k, 0);
+  vector<int> player(n, 0);
 
   for (int i = 0; i < q; i++) {
     int a;
