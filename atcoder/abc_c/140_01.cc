@@ -19,10 +19,8 @@ int main()
     }
     b1 = b2;
   }
-  if (2 < n) {
-    cin >> b1;
-    sum += b1;
-  }
+  cin >> b1;
+  sum += b1;
 
   cout << sum << endl;
   return 0;
