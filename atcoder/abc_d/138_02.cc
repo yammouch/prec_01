@@ -22,17 +22,17 @@ void unidir(map<int, set<int> > &m)
   vector<int> stack;
   stack.push_back(1);
   while(!stack.empty()) {
-    for (int i = 0; i < stack.size(); i++) {
-      cout << ' ' << stack[i];
-    }
-    cout << endl;
-    for (auto it = m.begin(); it != m.end(); it++) {
-      cout << "  " << it->first;
-      for (auto it2 = it->second.begin(); it2 != it->second.end(); it2++) {
-        cout << " " << *it2;
-      }
-    }
-    cout << endl;
+    //for (int i = 0; i < stack.size(); i++) {
+    //  cout << ' ' << stack[i];
+    //}
+    //cout << endl;
+    //for (auto it = m.begin(); it != m.end(); it++) {
+    //  cout << "  " << it->first;
+    //  for (auto it2 = it->second.begin(); it2 != it->second.end(); it2++) {
+    //    cout << " " << *it2;
+    //  }
+    //}
+    //cout << endl;
     int node = stack.back();
     stack.pop_back();
     for (auto it = m[node].begin(); it != m[node].end(); it++) {
@@ -47,15 +47,19 @@ void unidir(map<int, set<int> > &m)
   return;
 }
 
-void add1(int p, int x, map<int, set<int> > &m, vector<int> acc)
+void add1(int p, int x, map<int, set<int> > &m, vector<int> &acc)
 {
   vector<int> stack;
 
-  stack.push_back(1);
+  stack.push_back(p);
   while(!stack.empty()) {
+    //for (int i = 0; i < stack.size(); i++) {
+    //  cout << ' ' << stack[i];
+    //}
+    //cout << endl;
     int node = stack.back();
     stack.pop_back();
-    acc[node] += x;
+    acc[node-1] += x;
     for (auto it = m[node].begin(); it != m[node].end(); it++) {
       stack.push_back(*it);
     }
@@ -69,19 +73,19 @@ int main()
   int n, q;
   map<int, set<int> > m;
   cin >> n >> q;
-  vector<int> acc(n-1);
+  vector<int> acc(n);
 
   read_data(n, m);
-  cout << "read_data() finished." << endl;
+  //cout << "read_data() finished." << endl;
   unidir(m);
-  cout << "unidir() finished." << endl;
+  //cout << "unidir() finished." << endl;
 
   for (int i = 0; i < q; i++) {
     int p, x;
     cin >> p >> x;
     add1(p, x, m, acc);
   }
-  cout << "add1() finished." << endl;
+  //cout << "add1() finished." << endl;
 
   for (int i = 0; i < acc.size(); i++) {
     cout << acc[i] << ' ';
